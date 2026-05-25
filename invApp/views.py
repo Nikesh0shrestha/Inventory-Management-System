@@ -19,8 +19,17 @@ def product_create_view(request):
             form.save()
             return redirect('product_list')
     return render(request, 'invApp/product_form.html', {'form':form})
+
+
 #READ VIEW
+def product_list_view(request):
+    products = Product.objects.all()
+    return render (request, 'invApp/product_list.html',{'products':'products'})
+
 
 #UPDATE VIEW
+
+
+
 
 #DELETE VIEW
