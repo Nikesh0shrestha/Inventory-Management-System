@@ -25,5 +25,5 @@ class ProductForm(forms.ModelForm):
             'quantity' : forms.NumberInput
             (attrs={'placeholder':'e.g. 10','class':'form-control'}),
             'supplier ' : forms.TextInput
-            (attrs={'placeholder':'e.g. ABC Corp','class':'form-control'}),
+            (attrs={'placeholder':'e.g. ABC Corp  ','class':'form-control'}),
         }
