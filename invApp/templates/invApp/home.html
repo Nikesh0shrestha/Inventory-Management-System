@@ -1,9 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Inventory Management System</title>
-</head>
-<body>
+{% extends 'invApp/layout.html' %}
+{% block title %}Home{% endblock title %}
+{% block content %}
     <h1>This is Inventory Management System Home </h1>
-</body>
-</html>
+    <div class ="jumbotron text-center">
+        <h1 class = "display-4">Welcome to Inventory Management System</h1>
+        <p class = "lead">Manage your Products with ease</p>
+        <hr class = "my-4">
+        <p>
+            Use the navigation bar to add, show, update and delete products.
+        </p>
+        <a class = "btn btn-primary btn-lg" href = "{% url 'product_create' %}" role = "button">Add Product</a>
+        <a class = "btn btn-secondary btn-lg" href = "{% url 'product_list' %}" role = "button">Show Product</a>
+    </div>
+{% endblock content %}  
