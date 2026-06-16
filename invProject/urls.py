@@ -17,7 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('invApp.urls')),
+
+    path('admin/',admin.site.urls),
+
+
+    # Normal Django website
+    path('',include('invApp.urls') ),
+
+
+    # REST API
+    path(
+        'api/',include('invApp.api_urls')),
 ]
