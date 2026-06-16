@@ -1,10 +1,9 @@
 
 from rest_framework.views import APIView
-from rest_framework.response import Response, Serializer
+from rest_framework.response import Response 
 from rest_framework import status
 from.serializers import ProductSerializer
-from .models import Product
-
+from .models import Product 
 from django.shortcuts import get_object_or_404
 
 
@@ -26,14 +25,13 @@ class ProductAPIView(APIView):
 
 class ProductDetailAPIView(APIView):
     def get(self,request,product_id):
-        product = get_object_or_404(Product, id=product_id)
-        serializer = ProductSerializer(Product)
-
+        product = get_object_or_404(Product, product_id=product_id) 
+        serializer = ProductSerializer(product)
         return Response(serializer.data)
 
     def put(self,request, product_id):
         product = get_object_or_404(Product,id=product_id)
-        serializer = ProductSerializer(Product,data=request.data)
+        serializer = ProductSerializer(product,data=request.data)
 
 
         if serializer.is_valid():
@@ -43,8 +41,8 @@ class ProductDetailAPIView(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self,request,product_id):
-        product = get_object_or_404(Product,id=product_id)
-        product.DELETE()
+        product = get_object_or_404(Product,product_id=product_id)
+        product.delete()
 
         return Response({"message":"Product deleted successfully!!"},
         status=status.HTTP_204_NO_CONTENT)
