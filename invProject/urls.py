@@ -18,21 +18,38 @@ from django.contrib import admin
 from django.urls import path, include
 
 from rest_framework.routers import DefaultRouter
-from invApp. views import ProductViewSet
 
-router = DefaultRouter
-router .register('products',ProductViewSet,basename='Products')
+from invApp.views import ProductViewSet
+
+
+router = DefaultRouter()
+
+
+router.register(
+    'products',
+    ProductViewSet,
+    basename='products'
+)
+
+
 
 urlpatterns = [
 
-    path('admin/',admin.site.urls),
-
-
-    # Normal Django website
-    path('',include('invApp.urls') ),
-
-
-    # REST API
     path(
-        'api/',include('invApp.api_urls')),
+        'admin/',
+        admin.site.urls
+    ),
+
+
+    path(
+        '',
+        include('invApp.urls')
+    ),
+
+
+    path(
+        'api/',
+        include(router.urls)
+    ),
+
 ]
