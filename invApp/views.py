@@ -4,6 +4,9 @@ from django.shortcuts import render, redirect
 from . forms import ProductForm
 from . models import Product
 
+from rest_framework.viewsets import ModelViewSet
+from . serializers import ProductSerializer
+from .models import Product
 # CRUD = CREATE,READ, UPDATE,AND DELETE
 
 #HOME VIEW 
@@ -47,3 +50,8 @@ def product_delete_view(request,product_id):
         product.delete()
         return redirect('product_list')
     return render(request, 'invApp/product_confirm_delete.html',{'product': product})
+
+
+class ProductViewSet(ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
