@@ -19,37 +19,27 @@ from django.urls import path, include
 
 from rest_framework.routers import DefaultRouter
 
+from invApp.serializers import CategorySerializer
 from invApp.views import ProductViewSet
 
 
 router = DefaultRouter()
 
 
-router.register(
-    'products',
-    ProductViewSet,
-    basename='products'
-)
+router.register('products',ProductViewSet,basename='products')
+router.register('categories',CategorySerializer,basename='categories')
 
 
 
 urlpatterns = [
 
-    path(
-        'admin/',
-        admin.site.urls
-    ),
+    path('admin/',admin.site.urls),
 
 
-    path(
-        '',
-        include('invApp.urls')
-    ),
+    path('',include('invApp.urls')),
 
 
-    path(
-        'api/',
-        include(router.urls)
-    ),
+    path('api/',include(router.urls)),
+
 
 ]
