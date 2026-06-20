@@ -16,14 +16,14 @@ class CategorySerializer(serializers.ModelSerializer):
     
     class Meta:
 
-        model = category
+        model = Category
 
         fields = '__all__'
 
 class StockTransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
-        
+
         model = StockTransaction
 
         fields = "__all__"
