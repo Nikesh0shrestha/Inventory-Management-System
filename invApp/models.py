@@ -7,23 +7,6 @@ from django.utils.html import MAX_URL_LENGTH
 from django.contrib.auth.models import User
 
 # Create your models here.
-
-class Product(models.Model):
-    product_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    sku = models.CharField(max_length=50,unique=True)
-    price  = models.FloatField()
-    quantity = models.IntegerField()
-    supplier = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now = True)
-    updated_at = models.DateTimeField(auto_now = True)
-
-
-    def __str__(self):
-        return self.name
-    
-
-
 class Category(models.Model):
     name = models.CharField(max_length = 100, unique=True)
     descriptions = models.TextField(blank = True, null = True)
@@ -31,6 +14,22 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+class Product(models.Model):
+    product_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    sku = models.CharField(max_length=50,unique=True)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE,related_name="products")
+    price  = models.DecimalField(max_digits=10,decimal_places=2)
+    quantity = models.IntegerField(default=0)
+    supplier = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now_add = True)
+
+
+    def __str__(self):
+        return self.name
+    
 
 class StockTransaction(models.Model):
     TRANSACTIONS_TYPES =[('IN','Stock_IN'),('OUT','Stock_Out')]
