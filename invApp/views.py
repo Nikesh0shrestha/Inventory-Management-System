@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from . forms import ProductForm
-from . models import Product
+from . models import Category, Product
 
 from rest_framework.viewsets import ModelViewSet
-from . serializers import ProductSerializer
+from . serializers import CategorySerializer, ProductSerializer
 from .models import Product
 # CRUD = CREATE,READ, UPDATE,AND DELETE
 
@@ -55,3 +55,8 @@ def product_delete_view(request,product_id):
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
