@@ -1,12 +1,15 @@
+from itertools import product
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from . forms import ProductForm
-from . models import Category, Product
+from . models import Category, Product, StockTransaction
 
 from rest_framework.viewsets import ModelViewSet
-from . serializers import CategorySerializer, ProductSerializer
+from . serializers import CategorySerializer, ProductSerializer,StockTransactionSerializer
 from .models import Product
+from rest_framework.response import Response
+from django.db import transaction
 # CRUD = CREATE,READ, UPDATE,AND DELETE
 
 #HOME VIEW 
@@ -60,3 +63,27 @@ class ProductViewSet(ModelViewSet):
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+
+class StockTransactionViewSet(ModelViewSet):
+    queryset = StockTransaction.objects.all()
+    serializer_class = StockTransactionSerializer
+
+    def perform_create(self, serializer):
+        product = serializer.validated_data["product"]
+        qty = serializer.validated_data["quantity"]
+        t_type = serializer.validated_data["transaction_type"]
+
+
+        if t_type == "IN":
+            product.quantity += qty
+        
+        elif t_type == "OUT":
+            if product.quantity < qty :
+                raise Exception("Not enough Stock!!")
+            
+            product.quantity -= qty
+        
+        product.save()
+
+        serializer.save(created_by = self.request.user)
