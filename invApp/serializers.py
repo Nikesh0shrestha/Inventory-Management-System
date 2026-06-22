@@ -22,8 +22,23 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class StockTransactionSerializer(serializers.ModelSerializer):
 
+    product_name = serializers.CharField(sourse="product_name",ready_only = True)   
+
     class Meta:
 
         model = StockTransaction
 
-        fields = "__all__"
+        fields = [
+            "id",
+            "product",
+            "product_name",
+            "transaction_type",
+            "quantity",
+            "created_by",
+            "created_at",
+        ]
+
+        read_only_fields = [
+            "created_by",
+            "created_at",
+        ]
