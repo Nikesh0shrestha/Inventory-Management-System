@@ -20,7 +20,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from invApp.serializers import CategorySerializer
-from invApp.views import CategoryViewSet, ProductViewSet
+from invApp.views import CategoryViewSet, ProductViewSet, StockTransactionViewSet
 
 
 router = DefaultRouter()
@@ -28,6 +28,7 @@ router = DefaultRouter()
 
 router.register('products',ProductViewSet,basename='products')
 router.register('categories',CategoryViewSet,basename='categories')
+router.register('transactions',StockTransactionViewSet,basename='transactions')
 
 
 
