@@ -22,7 +22,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class StockTransactionSerializer(serializers.ModelSerializer):
 
-    product_name = serializers.CharField(sourse="product_name",ready_only = True)   
+    product_name = serializers.CharField(read_only = True)   
 
     class Meta:
 
@@ -32,7 +32,7 @@ class StockTransactionSerializer(serializers.ModelSerializer):
             "id",
             "product",
             "product_name",
-            "transaction_type",
+            "transaction_types",
             "quantity",
             "created_by",
             "created_at",
