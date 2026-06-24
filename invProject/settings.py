@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'rest_framework',
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [
@@ -138,9 +140,10 @@ REST_FRAMEWORK = {
 
     ),
 
-    'DEFAULT_FILTER_BACKENDS':(
+    'DEFAULT_FILTER_BACKENDS':[
         'django-filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter'
-    )
+    ]
+    
 
 }
