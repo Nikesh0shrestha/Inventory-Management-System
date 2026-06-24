@@ -136,6 +136,11 @@ REST_FRAMEWORK = {
 
         'rest_framework.permissions.IsAuthenticated',
 
+    ),
+
+    'DEFAULT_FILTER_BACKENDS':(
+        'django-filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter'
     )
 
 }
