@@ -1,5 +1,6 @@
 from itertools import product
 from re import search
+from django.core.serializers import serialize
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -14,6 +15,7 @@ from django.db import transaction
 
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.decorators import action
 
 # CRUD = CREATE,READ, UPDATE,AND DELETE
 
@@ -63,6 +65,13 @@ def product_delete_view(request,product_id):
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    @action(detail=False,methods=['get'])
+
+    def low_stock(self,request):
+        products = Product.objects.filter(quantity_lte=10)
+        serializer = self.get_serializer(product,many=True)
+        return Response(serializer.data)    
 
     filter_backends = [
         SearchFilter,
