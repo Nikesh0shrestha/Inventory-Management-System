@@ -75,6 +75,12 @@ class ProductViewSet(ModelViewSet):
         'supplier'
     ]
 
+    search_fields = [
+        'name',
+        'sku',
+        'supplier'
+    ]
+
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
