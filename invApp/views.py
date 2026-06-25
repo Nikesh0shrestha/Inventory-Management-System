@@ -75,10 +75,8 @@ class ProductViewSet(ModelViewSet):
         'supplier'
     ]
 
-    search_fields = [
-        'name',
-        'sku',
-        'supplier'
+    filter_fields = [
+        'category'
     ]
 
 
