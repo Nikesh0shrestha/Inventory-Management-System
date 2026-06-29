@@ -24,6 +24,8 @@ from invApp.views import CategoryViewSet, ProductViewSet, StockTransactionViewSe
 
 from rest_framework_simplejwt.views import(TokenObtainPairView,TokenRefreshView)
 
+from drf_spectacular.views import(SpectacularAPIView,SpectacularSwaggerView)
+
 router = DefaultRouter()
 
 
@@ -44,6 +46,10 @@ urlpatterns = [
     path('api/',include(router.urls)),
 
     path('api/token/',TokenObtainPairView.as_view(),name="token"),
-    path('api/refresh',TokenRefreshView.as_view(),name="refresh")
+    path('api/refresh',TokenRefreshView.as_view(),name="refresh"),
+
+    path('api/Schema/',SpectacularAPIView.as_view()),
+    path('api/docs/',SpectacularSwaggerView.as_view(url_name='schema')),
+
 
 ]
