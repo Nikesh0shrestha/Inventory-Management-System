@@ -145,6 +145,9 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend', # <-- Must be an underscore
         'rest_framework.filters.SearchFilter',
     ],
+
+    'DEFAULT_SCHEMA_CLASS':
+    'drf_spectacular.openapi.AutoSchema'
     
 
 }
