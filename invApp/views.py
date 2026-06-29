@@ -17,6 +17,7 @@ from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 
+from .permissions import IsStaffUser
 # CRUD = CREATE,READ, UPDATE,AND DELETE
 
 #HOME VIEW 
@@ -97,6 +98,10 @@ class StockTransactionViewSet(ModelViewSet):
     queryset = StockTransaction.objects.all()
     serializer_class = StockTransactionSerializer
 
+    permission_classes = [
+        IsStaffUser
+    ]
+
     def perform_create(self, serializer):
         product = serializer.validated_data["product"]
         qty = serializer.validated_data["quantity"]
@@ -115,3 +120,5 @@ class StockTransactionViewSet(ModelViewSet):
         product.save()
 
         serializer.save(created_by = self.request.user)
+
+
