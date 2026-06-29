@@ -67,7 +67,6 @@ class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
 
     @action(detail=False,methods=['get'])
-
     def low_stock(self,request):
         products = Product.objects.filter(quantity_lte=10)
         serializer = self.get_serializer(product,many=True)
