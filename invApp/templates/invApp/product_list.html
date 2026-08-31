@@ -26,6 +26,9 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.price }}</td>
                     <td>
+
+                        <a href="{% url 'product_update' product.product_id %}">Update</a>
+
                         <!-- Delete Button -->
                         <form method="post" action="{% url 'product_delete' product.product_id %}" style="display:inline;">
                             {% csrf_token %}

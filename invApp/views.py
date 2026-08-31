@@ -1,7 +1,7 @@
 from itertools import product
 from re import search
 from django.core.serializers import serialize
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from . forms import ProductForm
@@ -45,14 +45,21 @@ def product_list_view(request):
 
 #UPDATE VIEW
 def product_update_view(request, product_id):
-    product = product.objects.get(product_id = product_id)
-    form = ProductForm(instance=product)
+    product = get_object_or_404(Product, product_id = product_id)
+
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
             form.save()
             return redirect('product_list')
-    return redirect(request, 'invApp/product_form.html',{'form': form})    
+    else:
+        form = ProductForm(instance=product)
+
+    return redirect(request, 'invApp/product_form.html',{
+        'form': form,
+        'form_title': 'Update Product',
+        'button_text': 'Update Product'
+        })    
 
 
 
