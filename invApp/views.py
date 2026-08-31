@@ -28,16 +28,18 @@ def home_view(request):
     return render(request, 'invApp/home.html')
 
 #CREATE VIEW
+#CREATE VIEW
 def product_create_view(request):
-    form = ProductForm(request.POST)
     if request.method == 'POST':
         form = ProductForm(request.POST)
+
         if form.is_valid():
             form.save()
             return redirect('product_list')
     else:
         form = ProductForm()
-    return render(request, 'invApp/product_form.html', {'form':form})
+
+    return render(request, 'invApp/product_form.html', {'form': form})
 
 
 #READ VIEW
