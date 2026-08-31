@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'rest_framework',
     'django_filters',
-    'drf-spectacular',
-
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
