@@ -1,11 +1,11 @@
 from itertools import product
-from re import search
+ 
 from django.core.serializers import serialize
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from . forms import ProductForm
-from . models import Category, Product, StockTransaction
+from .forms import ProductForm
+from .models import Category, Product, StockTransaction
 
 from rest_framework.viewsets import ModelViewSet
 from . serializers import CategorySerializer, ProductSerializer,StockTransactionSerializer
@@ -18,6 +18,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 
 from .permissions import IsStaffUser
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 # CRUD = CREATE,READ, UPDATE,AND DELETE
 
 #HOME VIEW 
@@ -26,12 +29,14 @@ def home_view(request):
 
 #CREATE VIEW
 def product_create_view(request):
-    form = ProductForm()
+    form = ProductForm(request.POST)
     if request.method == 'POST':
-        form = ProductForm(request)
+        form = ProductForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('product_list')
+    else:
+        form = ProductForm()
     return render(request, 'invApp/product_form.html', {'form':form})
 
 
@@ -122,3 +127,6 @@ class StockTransactionViewSet(ModelViewSet):
         serializer.save(created_by = self.request.user)
 
 
+@api_view(['GET'])
+def dashboard_view(request):
+    return Response({"message":"Dashboard is working!"})

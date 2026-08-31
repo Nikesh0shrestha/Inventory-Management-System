@@ -29,7 +29,6 @@ class StockTransactionSerializer(serializers.ModelSerializer):
         model = StockTransaction
 
         fields = [
-            "id",
             "product",
             "product_name",
             "transaction_types",
